@@ -21,14 +21,26 @@ document.onkeyup = function(guess){
     playerGuess = guess.key;
     console.log(playerGuess);
 
+
+//game rules
+    
     if(playerGuess === chosenLtr){
         alert("You won!");
+        chosenLtr = [];
+        chancesCounter = 5;
     }else if(playerGuess !== chosenLtr && chancesCounter > 0){
         chancesCounter--;
+        guesses.push(playerGuess);
+        var guessTracker = document.createTextNode( "-" + playerGuess);
+        guessTracker.textContent = playerGuess;
+        document.getElementById("guesses").appendChild(guessTracker);
         alert("try again");
+
     }else {
         chosenLtr = [];
         alert("You Lose!");
+        chosenLtr = [];
+        chancesCounter = 5;
     };
 
 
