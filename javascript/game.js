@@ -1,29 +1,37 @@
 
 //creating global variables for game
-var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
-                "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+                "n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var chosenLtr = [];
 var playerGuess; //the actual guess the player chooses.
-var guesses = []; //storing guesses to mark out.
+var guesses = []; //storing guesses.
 var chancesCounter = 5;
-var letterBtn;
 
 
+//selects random letter when "play" button is clicked
 document.getElementById("start-button").addEventListener("click", function(){
-//loop to create buttons with alphabet
- for( var i = 0; i < alphabet.length; i++){
-    letterBtn = document.createElement("button");
-    letterBtn.className += "letter-buttons";
-    letterBtn.setAttribute("button-info",alphabet[i])
-    letterBtn.textContent = alphabet[i];
-    document.getElementById("alph-buttons").appendChild(letterBtn);
+    chosenLtr = alphabet[Math.floor(Math.random()*alphabet.length)];
+    console.log(chosenLtr);
+});
+
+//determines which guess player makes with keyboard
+//also is the start of the comparison.
+document.onkeyup = function(guess){
+
+    playerGuess = guess.key;
+    console.log(playerGuess);
+
+    if(playerGuess === chosenLtr){
+        alert("You won!");
+    }else if(playerGuess !== chosenLtr && chancesCounter > 0){
+        chancesCounter--;
+        alert("try again");
+    }else {
+        chosenLtr = [];
+        alert("You Lose!");
+    };
+
+
 };
 
-document.getElementsByClassName("letter-buttons").addEventListener("click",function(){
 
-    playerGuess.push(letterBtn);
-    alert(playerGuess);
-});
-
-
-});
